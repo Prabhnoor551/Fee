@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dynamic Navbar</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    .navbar {
+      background-color: #333;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 18px;
+      transition: color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .nav-links a:hover {
+      color: #ff9800;
+    }
+
+    #content {
+      padding: 40px;
+      max-width: 800px;
+      margin: 30px auto 0 auto;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <nav class="nav-links">
+      <a onclick="showContent('home')">Home</a>
+      <a onclick="showContent('about')">About</a>
+      <a onclick="showContent('contact')">Contact</a>
+    </nav>
+  </header>
+
+  <div id="content"></div>
+
+  <script>
+    function showContent(section) {
+      const content = document.getElementById("content");
+      content.style.display = "block";
+
+      let html = "";
+
+      if (section === 'home') {
+        html = `
+          <h2>Welcome to the Home Page</h2>
+          <p>This is the home section. Discover our latest updates and features here.</p>
+        `;
+      } else if (section === 'about') {
+        html = `
+          <h2>About Us</h2>
+          <p>We are passionate about building beautiful web experiences. Our mission is to deliver high-quality solutions that are both functional and visually appealing.</p>
+        `;
+      } else if (section === 'contact') {
+        html = `
+          <h2>Contact Us</h2>
+          <p>Feel free to reach out to us for inquiries, support, or collaboration. Email us at <a href="mailto:info@example.com">info@example.com</a>.</p>
+        `;
+      }
+
+      content.innerHTML = html;
+    }
+  </script>
+
+</body>
+</html>
