@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Easy Form</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 400px; margin: 2em auto; }
+    .field { margin-bottom: 1em; }
+    .field label { display: block; margin-bottom: 0.25em; }
+    .field input { width: 100%; padding: 0.5em; box-sizing: border-box; }
+    .error { color: red; margin-top: 0.5em; }
+  </style>
+</head>
+<body>
+  <h2>Registration Form</h2>
+  <form id="regForm">
+    <div class="field">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Your name" />
+    </div>
+    <div class="field">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="you@example.com" />
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Min 8 characters" />
+    </div>
+    <div class="field">
+      <label for="age">Age</label>
+      <input type="number" id="age" name="age" placeholder="Your age" min="1" />
+    </div>
+    <div class="field">
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" placeholder="10-digit phone" pattern="\d{10}" />
+    </div>
+    <button type="submit">Submit</button>
+    <div id="errorMsg" class="error"></div>
+  </form>
+
+  <script>
+    const form = document.getElementById('regForm');
+    const errorMsg = document.getElementById('errorMsg');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      errorMsg.textContent = '';
+
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const password = form.password.value;
+      const age = parseInt(form.age.value, 10);
+      const phone = form.phone.value.trim();
+
+      if (!name || !email || !password || !form.age.value || !phone) {
+        errorMsg.textContent = 'All fields are mandatory.';
+        return;
+      }
+      if (name.length < 3) {
+        errorMsg.textContent = 'Name must be at least 3 characters long.';
+        return;
+      }
+      if (!/^\S+@\S+\.\S+$/.test(email)) {
+        errorMsg.textContent = 'Please enter a valid email address.';
+        return;
+      }
+      if (password.length < 8) {
+        errorMsg.textContent = 'Password must be at least 8 characters long.';
+        return;
+      }
+      if (isNaN(age) || age <= 0) {
+        errorMsg.textContent = 'Please enter a valid age.';
+        return;
+      }
+      if (!/^\d{10}$/.test(phone)) {
+        errorMsg.textContent = 'Phone number must be exactly 10 digits.';
+        return;
+      }
+
+      // If all checks pass
+      alert('Form submitted successfully!');
+      form.reset();
+    });
+  </script>
+</body>
+</html>
